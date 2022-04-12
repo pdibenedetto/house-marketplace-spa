@@ -1,9 +1,7 @@
+import SignIn from './SignIn'
+
 const Profile = () => {
-  return (
-    <div>
-      <h1>Profile</h1>
-    </div>
-  )
+  return <SignIn />
 }
 
 export default Profile
