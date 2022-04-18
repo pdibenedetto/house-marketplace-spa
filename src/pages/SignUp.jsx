@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth'
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.conf'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
@@ -41,6 +42,13 @@ const SignUp = () => {
       updateProfile(auth.currentUser, {
         displayName: name,
       })
+
+      const formDataCopy = { ...formData }
+      delete formDataCopy.password
+      formDataCopy.timestamp = serverTimestamp()
+
+      await setDoc(doc(db, 'users', user.uid), formDataCopy)
+
       navigate('/')
     } catch (error) {
       console.log(error)
@@ -53,7 +61,7 @@ const SignUp = () => {
           <p className='pageHeader'>Welcome Back!</p>
         </header>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <input
             className='nameInput'
             placeholder='Name'
