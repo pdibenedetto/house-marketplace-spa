@@ -28,17 +28,16 @@ const SignIn = () => {
 
     try {
       const auth = getAuth()
-      console.log(auth)
+
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       )
-      
-      if(userCredential.user) {
+
+      if (userCredential.user) {
         navigate('/')
       }
-
     } catch (error) {
       toast.error('Bad User Credentials')
     }
@@ -53,13 +52,14 @@ const SignIn = () => {
 
         <form onSubmit={onSubmit}>
           <input
+            type='email'
             className='emailInput'
             placeholder='Email'
-            type='email'
             id='email'
             value={email}
             onChange={onChange}
           />
+
           <div className='passwordInputDiv'>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -69,6 +69,7 @@ const SignIn = () => {
               value={password}
               onChange={onChange}
             />
+
             <img
               src={visibilityIcon}
               alt='show password'
@@ -90,7 +91,7 @@ const SignIn = () => {
         </form>
 
         <OAuth />
-        
+
         <Link to='/sign-up' className='registerLink'>
           Sign Up Instead
         </Link>

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 const Contact = () => {
   const [message, setMessage] = useState(null)
   const [landlord, setLandlord] = useState(null)
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams()
 
   const params = useParams()
@@ -22,12 +23,11 @@ const Contact = () => {
         toast.error('Could not get landlord data')
       }
     }
+
     getLandlord()
   }, [params.landlordId])
 
-  const onChange = (e) => {
-    setMessage(e.target.value)
-  }
+  const onChange = (e) => setMessage(e.target.value)
 
   return (
     <div className='pageContainer'>
@@ -40,6 +40,7 @@ const Contact = () => {
           <div className='contactLandlord'>
             <p className='landlordName'>Contact {landlord?.name}</p>
           </div>
+
           <form className='messageForm'>
             <div className='messageDiv'>
               <label htmlFor='message' className='messageLabel'>
@@ -50,13 +51,15 @@ const Contact = () => {
                 id='message'
                 className='textarea'
                 value={message}
-                onChance={onChange}></textarea>
+                onChange={onChange}
+              ></textarea>
             </div>
 
             <a
               href={`mailto:${landlord.email}?Subject=${searchParams.get(
                 'listingName'
-              )}&body=${message}`}>
+              )}&body=${message}`}
+            >
               <button type='button' className='primaryButton'>
                 Send Message
               </button>

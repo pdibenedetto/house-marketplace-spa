@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -35,12 +35,15 @@ const SignUp = () => {
 
     try {
       const auth = getAuth()
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       )
+
       const user = userCredential.user
+
       updateProfile(auth.currentUser, {
         displayName: name,
       })
@@ -53,9 +56,10 @@ const SignUp = () => {
 
       navigate('/')
     } catch (error) {
-      toast.error('Something went wrong with registration!')
+      toast.error('Something went wrong with registration')
     }
   }
+
   return (
     <>
       <div className='pageContainer'>
@@ -65,21 +69,22 @@ const SignUp = () => {
 
         <form onSubmit={onSubmit}>
           <input
+            type='text'
             className='nameInput'
             placeholder='Name'
-            type='text'
             id='name'
             value={name}
             onChange={onChange}
           />
           <input
+            type='email'
             className='emailInput'
             placeholder='Email'
-            type='email'
             id='email'
             value={email}
             onChange={onChange}
           />
+
           <div className='passwordInputDiv'>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -89,6 +94,7 @@ const SignUp = () => {
               value={password}
               onChange={onChange}
             />
+
             <img
               src={visibilityIcon}
               alt='show password'
@@ -110,7 +116,7 @@ const SignUp = () => {
         </form>
 
         <OAuth />
-        
+
         <Link to='/sign-in' className='registerLink'>
           Sign In Instead
         </Link>

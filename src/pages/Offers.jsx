@@ -21,31 +21,39 @@ const Offers = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
+        // Get reference
         const listingsRef = collection(db, 'listings')
+
+        // Create a query
         const q = query(
           listingsRef,
           where('offer', '==', true),
           orderBy('timestamp', 'desc'),
           limit(10)
         )
+
+        // Execute query
         const querySnap = await getDocs(q)
+
         const lastVisible = querySnap.docs[querySnap.docs.length - 1]
         setLastFetchedListing(lastVisible)
 
-        // Can use const instead of let because we're just pushing
         const listings = []
+
         querySnap.forEach((doc) => {
           return listings.push({
             id: doc.id,
             data: doc.data(),
           })
         })
+
         setListings(listings)
         setLoading(false)
       } catch (error) {
         toast.error('Could not fetch listings')
       }
     }
+
     fetchListings()
   }, [])
 
@@ -91,6 +99,7 @@ const Offers = () => {
       <header>
         <p className='pageHeader'>Offers</p>
       </header>
+
       {loading ? (
         <Spinner />
       ) : listings && listings.length > 0 ? (
@@ -106,6 +115,7 @@ const Offers = () => {
               ))}
             </ul>
           </main>
+
           <br />
           <br />
           {lastFetchedListing && (

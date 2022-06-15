@@ -29,6 +29,7 @@ const Slider = () => {
           data: doc.data(),
         })
       })
+
       setListings(listings)
       setLoading(false)
     }
@@ -39,36 +40,40 @@ const Slider = () => {
   if (loading) {
     return <Spinner />
   }
-  return listings && (
-    <>
-      <p className="exploreHeading">Recommended</p>
-      <Swiper slidesPerView={1} pagination={{clickable: true}}>
-        {listings.map(({data, id}) => (
-          <SwiperSlide 
-            key={id} 
-            onClick={() => navigate(`/category/${data.type}/${id}`)}
-          >
-          {console.log(data)}
-          {
-            console.log(data.imgUrls)
-          }
-            <div 
-              style={{
-                //background: `url(${data.imgUrls[0]}) center no-repeat`,
-                backgroundSize: 'cover',
-              }}
-              className="swiperSlideDiv">
-              <p className="swiperSlideText">{data.name}</p>
-              <p className="swiperSlidePrive">
-                ${data.discountedPrice ?? data.regularPrice}
-                {' '}
-                {data.type === 'rent' && '/ month'}
-              </p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </>
+
+  if (listings.length === 0) {
+    return <></>
+  }
+
+  return (
+    listings && (
+      <>
+        <p className='exploreHeading'>Recommended</p>
+
+        <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+          {listings.map(({ data, id }) => (
+            <SwiperSlide
+              key={id}
+              onClick={() => navigate(`/category/${data.type}/${id}`)}
+            >
+              <div
+                style={{
+                  background: `url(${data.imgUrls[0]}) center no-repeat`,
+                  backgroundSize: 'cover',
+                }}
+                className='swiperSlideDiv'
+              >
+                <p className='swiperSlideText'>{data.name}</p>
+                <p className='swiperSlidePrice'>
+                  ${data.discountedPrice ?? data.regularPrice}{' '}
+                  {data.type === 'rent' && '/ month'}
+                </p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </>
+    )
   )
 }
 

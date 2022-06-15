@@ -8,8 +8,10 @@ const Explore = () => {
     <div className='explore'>
       <header>
         <p className='pageHeader'>Explore</p>
-        <main>
-          <Slider />
+      </header>
+
+      <main>
+        <Slider />
 
           <p className='exploreCategoryHeading'>Categories</p>
           <div className='exploreCategories'>
@@ -19,7 +21,7 @@ const Explore = () => {
                 alt='rent'
                 className='exploreCategoryImg'
               />
-              <p className="exploreCategoryName">Places for rent</p>
+              <p className='exploreCategoryName'>Places for rent</p>
             </Link>
             <Link to='/category/sale'>
               <img
@@ -27,11 +29,10 @@ const Explore = () => {
                 alt='sell'
                 className='exploreCategoryImg'
               />
-              <p className="exploreCategoryName">Places for sale</p>
+              <p className='exploreCategoryName'>Places for sale</p>
             </Link>
           </div>
         </main>
-      </header>
     </div>
   )
 }
