@@ -12,7 +12,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../components/Spinner'
-import { upload } from '@testing-library/user-event/dist/upload'
 
 function EditListing() {
   // eslint-disable-next-line
