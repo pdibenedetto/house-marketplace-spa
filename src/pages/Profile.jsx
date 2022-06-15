@@ -74,6 +74,8 @@ const Profile = () => {
     }
   }
 
+  const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`)
+
   const onSubmit = async () => {
     try {
       if (auth.currentUser.displayName !== name) {
@@ -151,6 +153,7 @@ const Profile = () => {
                   listing={listing.data}
                   id={listing.id}
                   onDelete={() => onDelete(listing.id)}
+                  onEdit={() => onEdit(listing.id)}
                 />
               ))}
             </ul>
